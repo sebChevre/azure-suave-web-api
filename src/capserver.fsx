@@ -117,7 +117,7 @@ This sample application is an in-memory capabilities-based data store. It is a <
 
 let app =
   choose
-    [ GET >=> path "/" >=> Files.file "../public/home.html"
+    [ GET >=> path "/" >=> OK intro
       PUT >=> path "/api/create" >=> request (getData >> create)
       GET >=> pathScan "/api/read/%s" (toGuid >> read)
       GET >=> pathScan "/api/delegate/%s/%s" (fun (rud, id) ->
