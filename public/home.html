@@ -1,0 +1,26 @@
+<html>
+<head>
+    
+    <title>Capability-based Data Store (external home html)</title>
+    
+    <!-- bootstrap css-->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    <!-- bootrstrap scripts -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</head>
+<body>
+This sample application is an in-memory capabilities-based data store. It is a <a href="https://en.wikipedia.org/wiki/Create,_read,_update_and_delete">CRUD</a> <a href="https://en.wikipedia.org/wiki/Representational_state_transfer">RESTful</a> web API built using <a href="http://suave.io">Suave</a>.
+
+<h2>API description</h2>
+
+<ul>
+<li><code>PUT /api/create</code>. The body of the request is placed in the data store, and the API returns a GUID that can be used to read, update, delete, or delegate access to the data.
+<li><code>GET /api/read{guid}</code>. If the supplied GUID has read access to some data, that data is returned.
+<li><code>GET /delegate/{access}/{guid}</code>. Access must be a string that contains some combination of <code>r</code> (read), <code>u</code> (update), and <code>d</code> (delete). If the access requested is the same or a subset of the access on the supplied GUID, a new GUID is returned that has the requested access rights on the supplied GUID.
+<li><code>POST /api/update/{guid}</code>. If the supplied GUID has update access to some data, that data is changed to be the body of the request.
+<li><code>DELETE /api/delete/{guid}</code>. The GUID supplied is deleted. If the supplied GUID has delete access to some data, the entire chain of GUIDs back to the source is deleted.
+</ul>
+</body>
