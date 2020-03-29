@@ -1,4 +1,4 @@
-#r "../packages/Suave/lib/net40/Suave.dll"
+#r "../packages/suave/lib/net40/Suave.dll"
 
 open System
 open System.Collections.Concurrent
@@ -37,7 +37,7 @@ let getPermission (rud: string) =
     Update = rud.Contains "u"
     Delete = rud.Contains "d" }
 
-let toGuid s =
+let toGuid (s:string) =
   let mutable guid = Guid.Empty
   Guid.TryParse(s, &guid) |> ignore
   guid
