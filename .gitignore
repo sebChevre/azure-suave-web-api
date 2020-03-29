@@ -6,3 +6,4 @@ bin/
 test/
 .ionide/
 .vscode/
+.DS_Store
