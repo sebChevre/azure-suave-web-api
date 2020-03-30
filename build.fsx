@@ -4,6 +4,7 @@ open Fake.FscHelper
 open Fake
 open Fake.Azure
 open System.IO
+//open Fake.IO.FileSystem
 
 // This is the destination directory for your build.
 let buildDir = "./bin/"
@@ -16,7 +17,7 @@ let copyCore dir =
   ] |> FileHelper.Copy dir
 
 // This builds and deploys an .fsx file and a list of references.
-let buildScript dir file refs options =
+let buildScript dir (file:string) refs options =
   // Create the target directory if it does not exist.
   FileHelper.CreateDir dir
 
@@ -70,10 +71,16 @@ Target "Build" <| fun _ ->
     "src/webserver.fsx"
     [ "packages/Suave/lib/net40/Suave.dll" ]
     []
+  CopyDir (buildDir+"/public") "src/public" allFiles
 
 Target "StageFiles" <| fun _ ->
   FileHelper.CopyFile Kudu.deploymentTemp "web.config"
   Kudu.stageFolder buildDir <| fun _ -> true
+
+Target "CopyFoldersTargetLocation" (fun _ ->
+    //"src/public" |> CopyWithSubfoldersTo |> CopyWithSubfoldersTo releaseDir
+    CopyDir buildDir "src/public" allFiles
+)
 
 Target "Deploy" Kudu.kuduSync
 
@@ -81,6 +88,7 @@ Target "Deploy" Kudu.kuduSync
 ==> "Test"
 ==> "Build"
 ==> "StageFiles"
+==> "CopyFoldersTargetLocation"
 ==> "Deploy"
 
 RunTargetOrDefault "Build"
