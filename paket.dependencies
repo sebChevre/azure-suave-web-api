@@ -3,3 +3,6 @@ source https://www.nuget.org/api/v2
 nuget FAKE
 nuget FsCheck
 nuget Suave
+nuget Suave.Testing
+nuget Expecto
+nuget Net.Http

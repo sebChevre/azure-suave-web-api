@@ -1,4 +1,6 @@
-#r "../packages/suave/lib/net40/Suave.dll"
+#r "../packages/suave/lib/net461/Suave.dll"
+
+
 
 open System
 open System.Collections.Concurrent
@@ -7,6 +9,7 @@ open Suave.Filters
 open Suave.Operators
 open Suave.Successful
 open Suave.RequestErrors
+
 
 type Permission = {
   Read: bool
@@ -115,9 +118,17 @@ This sample application is an in-memory capabilities-based data store. It is a <
 </body>
 """
 
+//type Model =
+//  { title : string }
+
+//setTemplatesDir "templates"
+
+//et o = { title = "Hello World" }
+
 let app =
   choose
-    [ GET >=> path "/" >=> Files.file "public/home.html"
+    [ //GET >=> path "/liquid" >=> page "first.liquid" o
+      GET >=> path "/" >=> Files.file "public/home.html"
       PUT >=> path "/api/create" >=> request (getData >> create)
       GET >=> pathScan "/api/read/%s" (toGuid >> read)
       GET >=> pathScan "/api/delegate/%s/%s" (fun (rud, id) ->

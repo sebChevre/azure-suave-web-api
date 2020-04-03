@@ -57,7 +57,7 @@ Target "Clean" <| fun _ ->
 // Run tests before trying to build the target.
 Target "Test" <| fun _ ->
   // Execute the test script using FSI.
-  let (result, msgs) = executeFSI "." "src/test.fsx" Seq.empty
+  let (result, msgs) = executeFSI "." "src/WebServerTest.fsx" Seq.empty
   msgs
   |> Seq.iter (fun msg -> printfn "%s" msg.Message)
   if not result then
@@ -69,7 +69,7 @@ Target "Build" <| fun _ ->
   buildScript
     buildDir
     "src/webserver.fsx"
-    [ "packages/Suave/lib/net40/Suave.dll" ]
+    [ "packages/suave/lib/net461/Suave.dll" ]
     []
   CopyDir (buildDir+"/public") "src/public" allFiles
 
@@ -77,18 +77,13 @@ Target "StageFiles" <| fun _ ->
   FileHelper.CopyFile Kudu.deploymentTemp "web.config"
   Kudu.stageFolder buildDir <| fun _ -> true
 
-Target "CopyFoldersTargetLocation" (fun _ ->
-    //"src/public" |> CopyWithSubfoldersTo |> CopyWithSubfoldersTo releaseDir
-    CopyDir buildDir "src/public" allFiles
-)
-
 Target "Deploy" Kudu.kuduSync
 
 "Clean"
 ==> "Test"
 ==> "Build"
 ==> "StageFiles"
-==> "CopyFoldersTargetLocation"
 ==> "Deploy"
 
 RunTargetOrDefault "Build"
+

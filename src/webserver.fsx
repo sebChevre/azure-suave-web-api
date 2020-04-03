@@ -15,6 +15,6 @@ let port =
 
 let serverConfig =
   { defaultConfig with
-      bindings = [ HttpBinding.mk HTTP IPAddress.Loopback port ] }
+      bindings = [ HttpBinding.createSimple Protocol.HTTP "127.0.0.1" (int(port)) ] }
 
 startWebServer serverConfig Capserver.app
