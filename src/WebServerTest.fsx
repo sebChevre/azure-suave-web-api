@@ -1,6 +1,6 @@
 #r "../packages/suave/lib/net461/Suave.dll"
 #r "../packages/suave.testing/lib/net40/Suave.Testing.dll"
-#r "../packages/expecto/lib/netstandard2.0/Expecto.dll"
+#r "../packages/expecto/lib/net461/Expecto.dll"
 #r "../packages/System.Net.Http/lib/net46/System.Net.Http.dll"
 
 
