@@ -5,4 +5,4 @@ nuget FsCheck
 nuget Suave
 nuget Suave.Testing
 nuget Expecto
-nuget Net.Http
+nuget System.Net.Http

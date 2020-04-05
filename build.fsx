@@ -57,7 +57,7 @@ Target "Clean" <| fun _ ->
 // Run tests before trying to build the target.
 Target "Test" <| fun _ ->
   // Execute the test script using FSI.
-  let (result, msgs) = executeFSI "." "src/WebServerTest.fsx" Seq.empty
+  let (result, msgs) = executeFSI "src" "WebServerTest.fsx" Seq.empty
   msgs
   |> Seq.iter (fun msg -> printfn "%s" msg.Message)
   if not result then
