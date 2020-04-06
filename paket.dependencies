@@ -1,7 +1,7 @@
 framework: net46
 source https://www.nuget.org/api/v2
 nuget FAKE
-nuget FsCheck
+//nuget FsCheck
 nuget Suave
 nuget Suave.Testing
 nuget Expecto
