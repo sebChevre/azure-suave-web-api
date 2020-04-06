@@ -19,11 +19,13 @@ open System.Net.Http
 open Suave.Testing
 open System.Text.RegularExpressions
 
+(*
 let serverConfig =
   { defaultConfig with
       bindings = [ HttpBinding.createSimple Protocol.HTTP "127.0.0.1" 8083 ] }
+*)
 
-let runWithConfig = runWith (serverConfig)
+let runWithConfig = runWith (defaultConfig)
 
 let webPart = Capserver.app
 
