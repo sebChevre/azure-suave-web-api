@@ -77,5 +77,5 @@ let postDataTests =
  
 
 //runTests Impl.ExpectoConfig.defaultConfig homePageTests
-runTests Impl.ExpectoConfig.defaultConfig postDataTests
+//runTests Impl.ExpectoConfig.defaultConfig postDataTests
 

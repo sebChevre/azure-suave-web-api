@@ -2,7 +2,7 @@ RESTRICTION: == net46
 NUGET
   remote: https://www.nuget.org/api/v2
     Expecto (9.0.0)
-    FAKE (5.16.0)
+    FAKE (4.41.5)
     FSharp.Core (4.7.1)
     Suave (2.5.6)
     Suave.Testing (2.2.1)
